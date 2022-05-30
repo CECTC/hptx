@@ -150,35 +150,45 @@ func (manager *DistributedTransactionManager) IsLockable(ctx context.Context, re
 }
 
 func (manager *DistributedTransactionManager) branchCommit(ctx context.Context, bs *api.BranchSession) (api.BranchSession_BranchStatus, error) {
-	if bs.Type == api.TCC {
-		return resource.GetTCCBranchResource().Commit(ctx, bs)
+	var (
+		status api.BranchSession_BranchStatus
+		err    error
+	)
+	switch bs.Type {
+	case api.TCC:
+		status, err = resource.GetTCCBranchResource().Commit(ctx, bs)
+	case api.AT:
+		status, err = resource.GetATBranchResource().Commit(ctx, bs)
+	default:
+		return bs.Status, errors.New("should never happen!")
 	}
-	if bs.Type == api.AT {
-		status, err := resource.GetATBranchResource().Commit(ctx, bs)
-		if status == api.Complete {
-			if err := manager.storageDriver.DeleteBranchSession(context.Background(), bs.BranchID); err != nil {
-				log.Error(err)
-			}
+	if status == api.Complete {
+		if err := manager.storageDriver.DeleteBranchSession(context.Background(), bs.BranchID); err != nil {
+			log.Error(err)
 		}
-		return status, err
 	}
-	return bs.Status, errors.Errorf("unsupport branch type: %s", bs.Type)
+	return status, err
 }
 
 func (manager *DistributedTransactionManager) branchRollback(ctx context.Context, bs *api.BranchSession) (api.BranchSession_BranchStatus, error) {
-	if bs.Type == api.TCC {
-		return resource.GetTCCBranchResource().Rollback(ctx, bs)
+	var (
+		status api.BranchSession_BranchStatus
+		err    error
+	)
+	switch bs.Type {
+	case api.TCC:
+		status, err = resource.GetTCCBranchResource().Rollback(ctx, bs)
+	case api.AT:
+		status, err = resource.GetATBranchResource().Rollback(ctx, bs)
+	default:
+		return bs.Status, errors.New("should never happen!")
 	}
-	if bs.Type == api.AT {
-		status, err := resource.GetATBranchResource().Rollback(ctx, bs)
-		if status == api.Complete {
-			if err := manager.storageDriver.DeleteBranchSession(context.Background(), bs.BranchID); err != nil {
-				log.Error(err)
-			}
+	if status == api.Complete {
+		if err := manager.storageDriver.DeleteBranchSession(context.Background(), bs.BranchID); err != nil {
+			log.Error(err)
 		}
-		return status, err
 	}
-	return bs.Status, errors.Errorf("unsupport branch type: %s", bs.Type)
+	return status, err
 }
 
 func (manager *DistributedTransactionManager) processGlobalSessions() error {
