@@ -9,7 +9,8 @@ ___
 
 ## Requirements
 + Go 1.16 or higher.
-+ Mysql (5.7+), MariaDB
++ ETCD(3+)
++ AT mode: Mysql (5.7+), MariaDB
 
 ___
 ## Installation
