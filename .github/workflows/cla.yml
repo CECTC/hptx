@@ -21,7 +21,7 @@ jobs:
           path-to-signatures: '.github/signatures/version1/cla.json'
           path-to-document: 'https://github.com/CECTC/cla/blob/main/CECTCCLA.md' # e.g. a CLA or a DCO document
           # branch should not be protected
-          branch: 'dev'
+          branch: 'main'
           allowlist: bot*
 
          #below are the optional inputs - If the optional inputs are not given, then default values will be taken
