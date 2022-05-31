@@ -187,7 +187,7 @@ func (s *store) GlobalCommit(ctx context.Context, xid string) (api.GlobalSession
 		return gs.Status, err
 	}
 	if !txnResp.Succeeded {
-		return gs.Status, errors.New("update status to committing failed")
+		return gs.Status, errors.Errorf("update status to committing failed, xid %s", xid)
 	}
 
 	return api.Committing, nil
@@ -229,7 +229,7 @@ func (s *store) GlobalRollback(ctx context.Context, xid string) (api.GlobalSessi
 		return gs.Status, err
 	}
 	if !txnResp.Succeeded {
-		return gs.Status, errors.New("update status to rollbacking failed")
+		return gs.Status, errors.Errorf("update status to rollbacking failed, xid %s", xid)
 	}
 
 	return api.Rollbacking, nil
