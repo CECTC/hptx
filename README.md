@@ -28,7 +28,7 @@ Make sure [Git is installed](https://git-scm.com/downloads) on your machine and 
 You should have your ETCD ready first. then, you can initialize hptx via `hptx.InitFromFile`:
 ```go
 import (
-    "github.com/cectc/hptx"
+	"github.com/cectc/hptx"
 	"github.com/cectc/hptx/pkg/config"
 	"github.com/cectc/hptx/pkg/resource"
 	"github.com/cectc/mysql"
@@ -44,7 +44,7 @@ resource.InitATBranchResource(mysql.GetDataSourceManager())
 It is also possible to set the configuration directly:
 ```go
 import (
-    "github.com/cectc/hptx"
+	"github.com/cectc/hptx"
 	"github.com/cectc/hptx/pkg/config"
 	"github.com/cectc/hptx/pkg/resource"
 	"github.com/cectc/mysql"
