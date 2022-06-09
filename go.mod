@@ -3,7 +3,7 @@ module github.com/cectc/hptx
 go 1.16
 
 require (
-	github.com/cectc/dbpack v0.1.1-0.20220528032032-9eff19fd1e40
+	github.com/cectc/dbpack v0.1.1
 	github.com/dubbogo/gost v1.12.3
 	github.com/gogo/protobuf v1.3.2
 	github.com/pkg/errors v0.9.1
