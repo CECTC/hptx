@@ -65,6 +65,11 @@ hptx.InitWithConf(&config.DistributedTransaction{
 mysql.RegisterResource(config.GetATConfig().DSN)
 resource.InitATBranchResource(mysql.GetDataSourceManager())
 ```
+
+Support GlobalLock:
+```go
+db.ExecContext(context.WithValue(context.Background(), "GlobalLock", true), sql, args...)
+```
 [Examples are available in our repos](https://github.com/CECTC/hptx-samples)
 
 ---
