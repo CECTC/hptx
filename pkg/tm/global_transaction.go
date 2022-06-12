@@ -26,6 +26,7 @@ import (
 	ctx "github.com/cectc/hptx/pkg/base/context"
 	"github.com/cectc/hptx/pkg/config"
 	"github.com/cectc/hptx/pkg/core"
+	err2 "github.com/cectc/hptx/pkg/errors"
 )
 
 const (
@@ -130,6 +131,9 @@ func (gtx *DefaultGlobalTransaction) Commit(ctx *ctx.RootContext) error {
 	for retry > 0 {
 		status, err := core.GetDistributedTransactionManager().Commit(ctx, gtx.XID)
 		if err != nil {
+			if errors.Is(err, err2.GlobalTransactionFinished) {
+				return err
+			}
 			log.Errorf("failed to report global commit [%s],Retry Countdown: %d, reason: %s", gtx.XID, retry, err.Error())
 		} else {
 			gtx.Status = status
@@ -162,6 +166,9 @@ func (gtx *DefaultGlobalTransaction) Rollback(ctx *ctx.RootContext) error {
 	for retry > 0 {
 		status, err := core.GetDistributedTransactionManager().Rollback(ctx, gtx.XID)
 		if err != nil {
+			if errors.Is(err, err2.GlobalTransactionFinished) {
+				return err
+			}
 			log.Errorf("failed to report global rollback [%s],Retry Countdown: %d, reason: %s", gtx.XID, retry, err.Error())
 		} else {
 			gtx.Status = status
