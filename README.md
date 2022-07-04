@@ -1,4 +1,9 @@
 # hptx
+[![LICENSE](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/cectc/hptx/blob/main/LICENSE)
+![GitHub Workflow Status](https://github.com/cectc/hptx/actions/workflows/main.yml/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cectc/hptx)](https://goreportcard.com/report/github.com/cectc/hptx)
+[![GitHub Release](https://img.shields.io/github/release-pre/cectc/hptx.svg)](https://github.com/cectc/hptx/releases)
+
 High-performance non-intrusive distributed transaction solution, inspired by kubernetes, only for golang language.
 
 ___
