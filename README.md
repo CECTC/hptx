@@ -1,6 +1,7 @@
 # hptx
 [![LICENSE](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/cectc/hptx/blob/main/LICENSE)
 ![GitHub Workflow Status](https://github.com/cectc/hptx/actions/workflows/main.yml/badge.svg)
+[![GoDoc](https://godoc.org/github.com/cectc/hptx?status.svg)](https://godoc.org/github.com/cectc/hptx)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cectc/hptx)](https://goreportcard.com/report/github.com/cectc/hptx)
 [![GitHub Release](https://img.shields.io/github/release-pre/cectc/hptx.svg)](https://github.com/cectc/hptx/releases)
 
