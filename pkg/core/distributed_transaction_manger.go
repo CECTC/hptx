@@ -149,6 +149,10 @@ func (manager *DistributedTransactionManager) IsLockable(ctx context.Context, re
 	return manager.storageDriver.IsLockable(ctx, resourceID, lockKey)
 }
 
+func (manager *DistributedTransactionManager) IsLockableWithXID(ctx context.Context, resourceID, lockKey, xid string) (bool, error) {
+	return manager.storageDriver.IsLockableWithXID(ctx, resourceID, lockKey, xid)
+}
+
 func (manager *DistributedTransactionManager) branchCommit(ctx context.Context, bs *api.BranchSession) (api.BranchSession_BranchStatus, error) {
 	var (
 		status api.BranchSession_BranchStatus

@@ -36,4 +36,5 @@ type TransactionManager interface {
 	BranchReport(ctx context.Context, branchID string, status api.BranchSession_BranchStatus) error
 	ReleaseLockKeys(ctx context.Context, resourceID string, lockKeys []string) (bool, error)
 	IsLockable(ctx context.Context, resourceID, lockKey string) (bool, error)
+	IsLockableWithXID(ctx context.Context, resourceID, lockKey, xid string) (bool, error)
 }
