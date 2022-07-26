@@ -141,7 +141,7 @@ func (gtx *DefaultGlobalTransaction) Commit(ctx *ctx.RootContext) error {
 		}
 		retry--
 		if retry == 0 {
-			return errors.New("Failed to report global commit")
+			return errors.Wrap(err, "Failed to report global commit")
 		}
 	}
 	log.Infof("[%s] commit status: %s", gtx.XID, gtx.Status.String())
