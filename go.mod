@@ -16,6 +16,7 @@ require (
 )
 
 require (
+	github.com/gin-gonic/gin v1.5.0
 	golang.org/x/net v0.0.0-20220517181318-183a9ca12b87 // indirect
 	google.golang.org/genproto v0.0.0-20220518221133-4f43b3371335 // indirect
 )

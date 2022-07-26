@@ -224,7 +224,12 @@ func (manager *DistributedTransactionManager) processGlobalSessions() error {
 				if err := manager.storageDriver.DeleteGlobalSession(context.Background(), gs.XID); err != nil {
 					return err
 				}
-				log.Debugf("global session finished, key: %s", gs.XID)
+				if gs.Status == api.Committing {
+					log.Debugf("global session commit finished, key: %s", gs.XID)
+				}
+				if gs.Status == api.Rollbacking {
+					log.Debugf("global session rollback finished, key: %s", gs.XID)
+				}
 			}
 		}
 	}
@@ -273,7 +278,12 @@ func (manager *DistributedTransactionManager) processNextGlobalSession(ctx conte
 			if err := manager.storageDriver.DeleteGlobalSession(context.Background(), newGlobalSession.XID); err != nil {
 				log.Error(err)
 			}
-			log.Debugf("global session finished, key: %s", newGlobalSession.XID)
+			if newGlobalSession.Status == api.Committing {
+				log.Debugf("global session commit finished, key: %s", newGlobalSession.XID)
+			}
+			if newGlobalSession.Status == api.Rollbacking {
+				log.Debugf("global session rollback finished, key: %s", newGlobalSession.XID)
+			}
 		}
 	}
 	return true
