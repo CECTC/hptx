@@ -19,7 +19,7 @@ package proto
 import (
 	"context"
 
-	"github.com/cectc/hptx/pkg/api"
+	"github.com/cectc/dbpack/pkg/dt/api"
 )
 
 type BranchResource interface {
