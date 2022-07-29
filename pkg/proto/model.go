@@ -16,7 +16,7 @@
 
 package proto
 
-import "github.com/cectc/hptx/pkg/api"
+import "github.com/cectc/dbpack/pkg/dt/api"
 
 type BranchRegister struct {
 	XID             string

@@ -21,17 +21,18 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/cectc/dbpack/pkg/dt/api"
+	"github.com/cectc/dbpack/pkg/dt/storage"
+	"github.com/cectc/dbpack/pkg/dt/storage/etcd"
 	"github.com/cectc/dbpack/pkg/log"
 	"github.com/cectc/dbpack/pkg/misc"
 	"github.com/cectc/dbpack/pkg/misc/uuid"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/util/workqueue"
 
-	"github.com/cectc/hptx/pkg/api"
 	"github.com/cectc/hptx/pkg/config"
 	"github.com/cectc/hptx/pkg/proto"
 	"github.com/cectc/hptx/pkg/resource"
-	"github.com/cectc/hptx/pkg/storage"
 )
 
 const DefaultRetryDeadThreshold = 130 * 1000
@@ -42,19 +43,16 @@ func InitDistributedTransactionManager(conf *config.DistributedTransaction) {
 	if conf.RetryDeadThreshold == 0 {
 		conf.RetryDeadThreshold = DefaultRetryDeadThreshold
 	}
+	driver := etcd.NewEtcdStore(conf.EtcdConfig)
 	manager = &DistributedTransactionManager{
 		applicationID:                    conf.ApplicationID,
+		storageDriver:                    driver,
 		retryDeadThreshold:               conf.RetryDeadThreshold,
 		rollbackRetryTimeoutUnlockEnable: conf.RollbackRetryTimeoutUnlockEnable,
 
 		globalSessionQueue: workqueue.NewDelayingQueue(),
 		branchSessionQueue: workqueue.New(),
 	}
-	driver := storage.GetStorageDriver()
-	if driver == nil {
-		log.Fatal("must init storage driver first")
-	}
-	manager.storageDriver = driver
 	go func() {
 		if driver.LeaderElection(manager.applicationID) {
 			if err := manager.processGlobalSessions(); err != nil {
@@ -101,7 +99,7 @@ func (manager *DistributedTransactionManager) Begin(ctx context.Context, transac
 		return "", err
 	}
 	manager.globalSessionQueue.AddAfter(gt, time.Duration(timeout)*time.Millisecond)
-	log.Infof("successfully begin global transaction xid = {}", gt.XID)
+	log.Infof("successfully begin global transaction xid = %s", gt.XID)
 	return xid, nil
 }
 

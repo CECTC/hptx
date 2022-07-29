@@ -20,10 +20,10 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/cectc/dbpack/pkg/dt/api"
 	"github.com/cectc/dbpack/pkg/log"
 	"github.com/pkg/errors"
 
-	"github.com/cectc/hptx/pkg/api"
 	ctx "github.com/cectc/hptx/pkg/base/context"
 	"github.com/cectc/hptx/pkg/proxy"
 )

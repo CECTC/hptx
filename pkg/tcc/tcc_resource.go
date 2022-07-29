@@ -17,7 +17,8 @@
 package tcc
 
 import (
-	"github.com/cectc/hptx/pkg/api"
+	"github.com/cectc/dbpack/pkg/dt/api"
+
 	"github.com/cectc/hptx/pkg/proxy"
 )
 

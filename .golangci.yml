@@ -7,16 +7,6 @@ linters:
     - misspell
     - goimports
 
-linters-settings:
-  staticcheck:
-    # Select the Go version to target.
-    # Default: 1.13
-    # Deprecated: use the global `run.go` instead.
-    go: "1.16"
-    # https://staticcheck.io/docs/options#checks
-    # Default: ["*"]
-    checks: ["all", "-SA1029"]
-
 issues:
   exclude-rules:
     # Exclude some linters from running on tests files.

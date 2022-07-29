@@ -21,9 +21,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/cectc/dbpack/pkg/dt/api"
 	"github.com/cectc/dbpack/pkg/log"
-
-	"github.com/cectc/hptx/pkg/api"
 )
 
 const (

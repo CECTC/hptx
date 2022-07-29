@@ -20,22 +20,16 @@ import (
 	"github.com/cectc/hptx/pkg/config"
 	"github.com/cectc/hptx/pkg/core"
 	"github.com/cectc/hptx/pkg/resource"
-	"github.com/cectc/hptx/pkg/storage"
-	"github.com/cectc/hptx/pkg/storage/etcd"
 	"github.com/cectc/hptx/pkg/tcc"
 )
 
 func InitFromFile(path string) {
 	conf := config.InitDistributedTransaction(path)
 	resource.InitTCCBranchResource(tcc.GetResourceManager())
-	driver := etcd.NewEtcdStore(conf.EtcdConfig)
-	storage.InitStorageDriver(driver)
 	core.InitDistributedTransactionManager(conf)
 }
 
 func InitWithConf(conf *config.DistributedTransaction) {
 	resource.InitTCCBranchResource(tcc.GetResourceManager())
-	driver := etcd.NewEtcdStore(conf.EtcdConfig)
-	storage.InitStorageDriver(driver)
 	core.InitDistributedTransactionManager(conf)
 }

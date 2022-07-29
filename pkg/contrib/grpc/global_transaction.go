@@ -26,7 +26,11 @@ import (
 	"github.com/cectc/hptx/pkg/core"
 )
 
-const XID = "xid"
+const XID = keyXID("XID")
+
+type (
+	keyXID string
+)
 
 type GlobalTransactionInfo struct {
 	FullMethod string
