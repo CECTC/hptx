@@ -9,7 +9,7 @@ High-performance non-intrusive distributed transaction solution, inspired by kub
 
 ___
 ## Features
-+ High-performance and non-intrusive
++ Event driven, High-performance and non-intrusive
 + Support AT mode And TCC mode
 + Support check global lock in local transaction
 
