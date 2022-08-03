@@ -13,6 +13,9 @@ ___
 + Support AT mode And TCC mode
 + Support check global lock in local transaction
 
+## Theory
+The distributed transaction principle of hptx and dbpack is the same. For details, please refer to: https://cectc.github.io/dbpack-doc/#/en-us/distributed_transaction
+
 ## Requirements
 + Go 1.16 or higher.
 + ETCD(3+)
