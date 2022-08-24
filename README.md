@@ -47,8 +47,7 @@ import (
 
 hptx.InitFromFile("${path of your config file}")
 // If you use at mode, initial with following code 
-mysql.RegisterResource(config.GetATConfig().DSN)
-resource.InitATBranchResource(mysql.GetDataSourceManager())
+mysql.RegisterATResource(config.GetATConfig().DSN)
 ```
 It is also possible to set the configuration directly:
 ```go
@@ -71,8 +70,7 @@ hptx.InitWithConf(&config.DistributedTransaction{
     TMConfig:                         config.TMConfig{},
 })
 // If you use at mode, initial with following code 
-mysql.RegisterResource(config.GetATConfig().DSN)
-resource.InitATBranchResource(mysql.GetDataSourceManager())
+mysql.RegisterATResource(config.GetATConfig().DSN)
 ```
 
 Support GlobalLock:
