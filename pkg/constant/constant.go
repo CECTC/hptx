@@ -14,36 +14,10 @@
  * program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package resource
+package constant
 
-import (
-	"github.com/cectc/dbpack/pkg/dt/api"
+const XID = keyXID("XID")
 
-	"github.com/cectc/hptx/pkg/proto"
+type (
+	keyXID string
 )
-
-var branches = make(map[api.BranchSession_BranchType]proto.BranchResource)
-
-func GetTCCBranchResource() proto.BranchResource {
-	return branches[api.TCC]
-}
-
-func GetATBranchResource() proto.BranchResource {
-	return branches[api.AT]
-}
-
-func GetXABranchResource() proto.BranchResource {
-	return branches[api.XA]
-}
-
-func InitTCCBranchResource(resource proto.BranchResource) {
-	branches[api.TCC] = resource
-}
-
-func InitATBranchResource(resource proto.BranchResource) {
-	branches[api.AT] = resource
-}
-
-func InitXABranchResource(resource proto.BranchResource) {
-	branches[api.XA] = resource
-}

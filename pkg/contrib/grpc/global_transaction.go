@@ -23,13 +23,8 @@ import (
 	"github.com/cectc/dbpack/pkg/log"
 	"google.golang.org/grpc"
 
+	"github.com/cectc/hptx/pkg/constant"
 	"github.com/cectc/hptx/pkg/core"
-)
-
-const XID = keyXID("XID")
-
-type (
-	keyXID string
 )
 
 type GlobalTransactionInfo struct {
@@ -47,7 +42,7 @@ func GlobalTransactionInterceptor(globalTransactionInfos []*GlobalTransactionInf
 				if err != nil {
 					return nil, err
 				}
-				ctx = context.WithValue(ctx, XID, xid)
+				ctx = context.WithValue(ctx, constant.XID, xid)
 				resp, err = handler(ctx, req)
 				if err == nil {
 					_, commitErr := core.GetDistributedTransactionManager().Commit(ctx, xid)
