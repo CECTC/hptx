@@ -161,6 +161,8 @@ func (manager *DistributedTransactionManager) branchCommit(ctx context.Context, 
 		status, err = resource.GetTCCBranchResource().Commit(ctx, bs)
 	case api.AT:
 		status, err = resource.GetATBranchResource().Commit(ctx, bs)
+	case api.XA:
+		status, err = resource.GetXABranchResource().Commit(ctx, bs)
 	default:
 		return bs.Status, errors.New("should never happen!")
 	}
@@ -182,6 +184,8 @@ func (manager *DistributedTransactionManager) branchRollback(ctx context.Context
 		status, err = resource.GetTCCBranchResource().Rollback(ctx, bs)
 	case api.AT:
 		status, err = resource.GetATBranchResource().Rollback(ctx, bs)
+	case api.XA:
+		status, err = resource.GetXABranchResource().Rollback(ctx, bs)
 	default:
 		return bs.Status, errors.New("should never happen!")
 	}
@@ -350,7 +354,7 @@ func (manager *DistributedTransactionManager) processNextBranchSession(ctx conte
 		}
 	}
 	if bs.Status == api.PhaseTwoRollbacking {
-		if manager.IsRollingBackDead(bs) {
+		if bs.Type == api.AT && manager.IsRollingBackDead(bs) {
 			if manager.rollbackRetryTimeoutUnlockEnable {
 				if _, err := manager.storageDriver.ReleaseLockKeys(context.Background(), bs.ResourceID, []string{bs.LockKey}); err != nil {
 					log.Error(err)
