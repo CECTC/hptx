@@ -84,6 +84,6 @@ db.ExecContext(context.WithValue(context.Background(), "GlobalLock", true), sql,
 
 [![Stargazers repo roster for cectc/hptx](https://reporoster.com/stars/cectc/hptx)](https://github.com/cectc/hptx)
 
----
+
 ## License
 hptx is licensed under the [GNU General Public License v3.0](https://github.com/CECTC/hptx/blob/main/LICENSE).
